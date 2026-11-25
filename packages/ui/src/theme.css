@@ -14,9 +14,20 @@
   --color-line: #232326;
   --color-bone: #f6f5ef;
   --color-mute: #a1a1aa;
-  --color-volt: #facc15;
-  --color-volt-2: #fde047;
-  --color-volt-dim: #a16207;
+  /* Acento naranja: 8,5:1 sobre negro (válido para texto pequeño). `volt` es el nombre histórico. */
+  --color-volt: #fb8603;
+  --color-volt-2: #ff9d2e;
+  --color-volt-dim: #b45f00;
+  --color-accent: #fb8603;
+  /* Rojo de marca: 6,2:1 con texto blanco (botones/bloques); sobre negro solo en texto grande. */
+  --color-brand: #bb2234;
+  --color-brand-2: #d12b40;
+  --color-brand-deep: #8f1727;
+  /* Papel claro para secciones alternas */
+  --color-paper: #f2efe9;
+  --color-paper-ink: #111111;
+  --color-paper-mute: #55555c;
+  --color-paper-line: #d9d4ca;
   --color-ok: #4ade80;
   --color-bad: #f87171;
 
@@ -42,10 +53,10 @@
   }
   @keyframes pulse-ring {
     0% {
-      box-shadow: 0 0 0 0 rgb(250 204 21 / 0.45);
+      box-shadow: 0 0 0 0 rgb(251 134 3 / 0.45);
     }
     100% {
-      box-shadow: 0 0 0 18px rgb(250 204 21 / 0);
+      box-shadow: 0 0 0 18px rgb(251 134 3 / 0);
     }
   }
 }
@@ -67,9 +78,11 @@
     background: var(--color-volt);
     color: var(--color-ink);
   }
+  /* Doble anillo: blanco + negro. Visible sobre negro, rojo y papel claro. */
   :focus-visible {
-    outline: 2px solid var(--color-volt);
-    outline-offset: 3px;
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px #000;
     border-radius: 6px;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -88,8 +101,11 @@
 
 @utility font-display-tight {
   font-family: var(--font-display);
-  letter-spacing: -0.01em;
-  line-height: 0.92;
+  /* Archivo (web) es variable en ancho; Barlow (app) ignora estas dos líneas. */
+  font-stretch: 125%;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: -0.02em;
+  line-height: 0.94;
   text-transform: uppercase;
 }
 

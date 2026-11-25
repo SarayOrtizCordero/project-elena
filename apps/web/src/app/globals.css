@@ -3,5 +3,18 @@
 @source "../../../../packages/ui/src";
 
 section[id] {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 4rem;
+}
+
+/* Sección de papel claro con grano sutil */
+@utility paper {
+  background-color: var(--color-paper);
+  color: var(--color-paper-ink);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Texto en contorno para la cinta */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
 }

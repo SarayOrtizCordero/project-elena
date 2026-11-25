@@ -25,7 +25,7 @@ export function Placeholder({
         "stripes relative flex w-full items-center justify-center overflow-hidden",
         tone === "dark"
           ? "bg-[radial-gradient(120%_90%_at_30%_10%,#2a2a2f_0%,#111113_60%,#0a0a0a_100%)]"
-          : "bg-[radial-gradient(120%_90%_at_30%_10%,#fde047_0%,#facc15_55%,#ca8a04_100%)]",
+          : "bg-[radial-gradient(120%_90%_at_30%_10%,#ff9d2e_0%,#fb8603_55%,#b45f00_100%)]",
         className,
       )}
     >

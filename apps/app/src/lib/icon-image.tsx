@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 
 /** Icono PWA: marca de Elena (mancuerna-corazón) en amarillo sobre negro. */
 export function renderIcon(size: number) {
-  const png = readFileSync(join(process.cwd(), "public", "brand", "logo-mark-volt.png"));
+  const png = readFileSync(join(process.cwd(), "public", "brand", "logo-mark-accent.png"));
   const src = `data:image/png;base64,${png.toString("base64")}`;
   const h = Math.round(size * 0.62);
   const w = Math.round(h * (226 / 314));

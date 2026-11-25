@@ -6,7 +6,7 @@ export function Logo({ className }: { className?: string }) {
     <span className={cn("inline-flex items-center gap-2.5 font-display text-2xl uppercase leading-none", className)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/brand/logo-mark-volt.png"
+        src="/brand/logo-mark-accent.png"
         alt=""
         width={226}
         height={314}

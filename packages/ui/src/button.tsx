@@ -3,7 +3,7 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "./cn";
 
 type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> & {
-  variant?: "primary" | "dark" | "ghost";
+  variant?: "primary" | "dark" | "ghost" | "brand" | "light";
   size?: "md" | "lg";
   href?: string;
   className?: string;
@@ -15,9 +15,11 @@ const base =
 
 const variants = {
   primary:
-    "bg-volt text-ink hover:bg-volt-2 hover:shadow-[0_0_0_6px_rgb(250_204_21/0.18)]",
+    "bg-volt text-ink hover:bg-volt-2 hover:shadow-[0_0_0_6px_rgb(251_134_3/0.18)]",
   dark: "bg-ink-3 text-bone border border-line hover:border-volt hover:text-volt",
   ghost: "text-bone border border-line hover:border-bone",
+  brand: "bg-brand text-white hover:bg-brand-2",
+  light: "bg-white text-ink hover:bg-paper",
 } as const;
 
 const sizes = {

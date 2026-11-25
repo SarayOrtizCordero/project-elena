@@ -13,20 +13,20 @@ function InstagramIcon() {
 
 export function Footer() {
   return (
-    <footer className="border-t border-line">
-      <Reveal className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 md:flex-row md:items-center md:justify-between">
+    <footer className="bg-black">
+      <Reveal className="mx-auto flex max-w-7xl flex-col gap-10 px-5 py-14 md:flex-row md:items-center md:justify-between">
         <div>
           <LogoBadge className="mb-4 size-28" />
           <Logo />
           <p className="mt-3 max-w-xs text-sm text-mute">Entrenamiento personal presencial y online.</p>
         </div>
-        <nav aria-label="Pie" className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-mute">
+        <nav aria-label="Pie de página" className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-mute">
           {nav.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-volt">
+            <a key={l.id} href={`#${l.id}`} className="py-1 hover:text-white">
               {l.label}
             </a>
           ))}
-          <a href={APP_URL} className="hover:text-volt">
+          <a href={APP_URL} className="py-1 hover:text-white">
             Acceso clientes
           </a>
         </nav>
@@ -35,8 +35,8 @@ export function Footer() {
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram de Elena"
-            className="grid size-11 place-items-center rounded-full border border-line transition-colors hover:border-volt hover:text-volt"
+            aria-label="Instagram de Elena (se abre en otra pestaña)"
+            className="grid size-11 place-items-center rounded-full border border-line transition-colors hover:border-white"
           >
             <InstagramIcon />
           </a>
@@ -44,14 +44,14 @@ export function Footer() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-volt hover:text-volt"
+            className="flex h-11 items-center rounded-full border border-line px-5 text-sm transition-colors hover:border-white"
           >
-            WhatsApp
+            WhatsApp<span className="sr-only"> (se abre en otra pestaña)</span>
           </a>
         </div>
       </Reveal>
-      <p className="border-t border-line py-5 text-center text-xs text-mute">
-        © {new Date().getFullYear()} Elena Fit · Web de demostración, contenido provisional.
+      <p className="border-t border-line px-5 py-5 text-center text-xs text-mute">
+        © {new Date().getFullYear()} Elena Fit · Web de demostración: textos, precios y fotos de stock provisionales.
       </p>
     </footer>
   );
