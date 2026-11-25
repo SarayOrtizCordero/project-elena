@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
 type From = "up" | "down" | "left" | "right" | "scale";
+type Tag = "div" | "li" | "p" | "span" | "section" | "article";
 
 type RevealProps = {
   children: ReactNode;
@@ -12,6 +13,7 @@ type RevealProps = {
   y?: number;
   /** Dirección desde la que aparece. */
   from?: From;
+  as?: Tag;
   className?: string;
 };
 
@@ -24,23 +26,24 @@ function initialFor(from: From, d: number) {
     case "right":
       return { opacity: 0, x: d };
     case "scale":
-      return { opacity: 0, scale: 0.85 };
+      return { opacity: 0, scale: 0.9 };
     default:
       return { opacity: 0, y: d };
   }
 }
 
 /** Aparece al entrar en pantalla al hacer scroll. Respeta prefers-reduced-motion vía MotionConfig. */
-export function Reveal({ children, delay = 0, y = 32, from = "up", className }: RevealProps) {
+export function Reveal({ children, delay = 0, y = 24, from = "up", as = "div", className }: RevealProps) {
+  const Comp = motion[as] as typeof motion.div;
   return (
-    <motion.div
+    <Comp
       className={className}
       initial={initialFor(from, y)}
       whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "0px 0px -60px 0px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </motion.div>
+    </Comp>
   );
 }

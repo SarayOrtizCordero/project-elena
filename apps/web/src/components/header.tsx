@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { Button, Logo, cn } from "@elena/ui";
 import { APP_URL, nav } from "@/lib/data";
@@ -9,8 +9,6 @@ import { APP_URL, nav } from "@/lib/data";
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -62,12 +60,6 @@ export function Header() {
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
       </div>
-
-      <motion.div
-        aria-hidden
-        style={{ scaleX: progress }}
-        className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-volt"
-      />
 
       <AnimatePresence>
         {open && (

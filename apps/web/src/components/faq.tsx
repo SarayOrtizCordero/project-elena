@@ -3,20 +3,20 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Plus } from "lucide-react";
-import { Reveal } from "@elena/ui";
+import { Reveal, RevealText } from "@elena/ui";
 import { faqs } from "@/lib/data";
 
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="border-t border-line bg-ink-2">
+    <section id="faq" className="border-t border-line">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-24 lg:grid-cols-[0.8fr_1.2fr]">
         <Reveal>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-volt">Dudas</p>
-          <h2 className="font-display-tight text-5xl font-extrabold sm:text-6xl">
-            Preguntas <span className="text-volt">frecuentes</span>
-          </h2>
+          <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-volt">
+            <span className="h-px w-8 bg-volt" /> Dudas
+          </p>
+          <RevealText as="h2" text="Preguntas *frecuentes*" className="font-display-tight text-5xl font-extrabold sm:text-6xl" />
         </Reveal>
 
         <Reveal delay={0.1}>

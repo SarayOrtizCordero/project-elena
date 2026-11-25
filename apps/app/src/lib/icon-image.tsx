@@ -17,7 +17,7 @@ export function renderIcon(size: number) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0a0a0a",
+          background: "#000000",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

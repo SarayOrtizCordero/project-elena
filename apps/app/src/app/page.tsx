@@ -32,7 +32,7 @@ export default function Login() {
 
   return (
     <div className="relative grid min-h-dvh place-items-center overflow-hidden px-5 py-10">
-      <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-volt/20 blur-[120px]" />
+      <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-volt/10 blur-[140px]" />
       <div className="relative w-full max-w-md">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <LogoBadge className="size-28" />

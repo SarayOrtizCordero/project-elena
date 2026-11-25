@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { CheckCircle2, Send } from "lucide-react";
-import { Button, Reveal } from "@elena/ui";
+import { Button, Reveal, RevealText } from "@elena/ui";
 import { WHATSAPP_URL } from "@/lib/data";
 
 const field =
@@ -24,13 +24,13 @@ export function Contact() {
 
   return (
     <section id="contacto" className="relative overflow-hidden">
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 size-[34rem] rounded-full bg-volt/15 blur-[120px]" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 size-[34rem] rounded-full bg-volt/10 blur-[140px]" />
       <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-24 lg:grid-cols-2">
         <Reveal>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-volt">Empieza hoy</p>
-          <h2 className="font-display-tight text-5xl font-extrabold sm:text-6xl lg:text-7xl">
-            Tu primer paso, <span className="text-volt">ahora</span>
-          </h2>
+          <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-volt">
+            <span className="h-px w-8 bg-volt" /> Empieza hoy
+          </p>
+          <RevealText as="h2" text="Tu primer paso, *ahora*" className="font-display-tight text-5xl font-extrabold sm:text-6xl lg:text-7xl" />
           <p className="mt-6 max-w-md text-lg text-mute">
             Cuéntame tu objetivo y te respondo en menos de 24 horas con una propuesta a tu medida.
           </p>
@@ -42,7 +42,7 @@ export function Contact() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="rounded-[1.75rem] border border-line bg-ink-2 p-6 sm:p-8">
+          <div className="rounded-3xl border border-line bg-ink-2 p-6 sm:p-8">
             <AnimatePresence mode="wait">
               {sent ? (
                 <motion.div

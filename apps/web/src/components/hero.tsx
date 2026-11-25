@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { ArrowRight, Flame, TrendingDown } from "lucide-react";
-import { Button, LogoBadge, Placeholder } from "@elena/ui";
+import { Button, LogoBadge, Placeholder, RevealText } from "@elena/ui";
 import { stats } from "@/lib/data";
 import { CountUp } from "./count-up";
 
@@ -28,7 +28,7 @@ export function Hero() {
     <section id="top" className="relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pb-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 -right-40 size-[38rem] rounded-full bg-volt/20 blur-[120px]"
+        className="pointer-events-none absolute -top-40 -right-40 size-[38rem] rounded-full bg-volt/10 blur-[140px]"
       />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.div variants={container} initial="hidden" animate="show">
@@ -39,16 +39,13 @@ export function Hero() {
             <span className="size-2 rounded-full bg-volt" /> Presencial · Online
           </motion.p>
 
-          <motion.h1
-            variants={item}
+          <RevealText
+            as="h1"
+            text={"Entrena\ncon *plan*,\nno con suerte"}
+            delay={0.25}
+            stagger={0.08}
             className="font-display-tight text-[clamp(3.5rem,13vw,8.5rem)] font-extrabold"
-          >
-            Entrena
-            <br />
-            con <span className="text-volt">plan</span>,
-            <br />
-            no con suerte
-          </motion.h1>
+          />
 
           <motion.p variants={item} className="mt-6 max-w-xl text-lg text-mute sm:text-xl">
             Rutina, nutrición y seguimiento real, diseñados para ti por Elena. En el gym o desde tu casa, con una app
@@ -84,7 +81,7 @@ export function Hero() {
           transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
-          <div className="overflow-hidden rounded-[2rem] border border-line">
+          <div className="overflow-hidden rounded-3xl border border-line">
             <Placeholder label="Foto de Elena (demo)" ratio="4/5" />
           </div>
 

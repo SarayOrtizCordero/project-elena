@@ -7,10 +7,11 @@
 }
 
 @theme {
-  --color-ink: #0a0a0a;
-  --color-ink-2: #121214;
-  --color-ink-3: #1b1b1f;
-  --color-line: #2b2b31;
+  /* Negro puro de fondo; las superficies se elevan con grises neutros muy sutiles. */
+  --color-ink: #000000;
+  --color-ink-2: #0b0b0c;
+  --color-ink-3: #161617;
+  --color-line: #232326;
   --color-bone: #f6f5ef;
   --color-mute: #a1a1aa;
   --color-volt: #facc15;

@@ -1,15 +1,15 @@
 import { Check, Dumbbell, Smartphone, Star } from "lucide-react";
-import { Placeholder, Reveal } from "@elena/ui";
+import { Placeholder, Reveal, RevealText } from "@elena/ui";
 import { marquee, services, steps, testimonials, transformations } from "@/lib/data";
 
 export function Marquee() {
   const items = [...marquee, ...marquee];
   return (
-    <div aria-hidden className="-rotate-1 overflow-hidden bg-volt py-3 text-ink">
-      <div className="flex w-max animate-marquee gap-8 whitespace-nowrap">
+    <div aria-hidden className="overflow-hidden border-y border-line bg-volt py-3 text-ink">
+      <div className="flex w-max animate-marquee gap-10 whitespace-nowrap">
         {[...items, ...items].map((w, i) => (
-          <span key={i} className="flex items-center gap-8 font-display text-3xl uppercase sm:text-4xl">
-            {w} <Dumbbell className="size-6" />
+          <span key={i} className="flex items-center gap-10 font-display text-2xl uppercase tracking-wide sm:text-3xl">
+            {w} <span className="size-1.5 rounded-full bg-ink" />
           </span>
         ))}
       </div>
@@ -17,29 +17,29 @@ export function Marquee() {
   );
 }
 
-function SectionTitle({ kicker, children }: { kicker: string; children: React.ReactNode }) {
+function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
   return (
-    <div className="mb-12 max-w-2xl">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-volt">{kicker}</p>
-      <h2 className="font-display-tight text-5xl font-extrabold sm:text-6xl lg:text-7xl">{children}</h2>
+    <div className="mb-14 max-w-2xl">
+      <Reveal y={12}>
+        <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-volt">
+          <span className="h-px w-8 bg-volt" /> {kicker}
+        </p>
+      </Reveal>
+      <RevealText as="h2" text={title} className="font-display-tight text-5xl font-extrabold sm:text-6xl lg:text-7xl" />
     </div>
   );
 }
 
 export function Services() {
   return (
-    <section id="servicios" className="mx-auto max-w-6xl px-5 py-24">
-      <Reveal>
-        <SectionTitle kicker="Servicios">
-          Dos formas de <span className="text-volt">llegar a tu meta</span>
-        </SectionTitle>
-      </Reveal>
+    <section id="servicios" className="mx-auto max-w-6xl px-5 py-28">
+      <SectionTitle kicker="Servicios" title="Dos formas de *llegar a tu meta*" />
       <div className="grid gap-5 md:grid-cols-2">
         {services.map((s, i) => (
-          <Reveal key={s.id} delay={i * 0.1}>
-            <article className="group h-full rounded-[1.75rem] border border-line bg-ink-2 p-7 transition duration-300 hover:-translate-y-1 hover:border-volt/60 sm:p-9">
+          <Reveal key={s.id} delay={i * 0.12}>
+            <article className="group h-full rounded-3xl border border-line bg-ink-2 p-7 transition duration-300 hover:border-volt/50 sm:p-9">
               <div className="mb-8 flex items-center justify-between">
-                <span className="grid size-14 place-items-center rounded-2xl bg-volt text-ink transition-transform duration-300 group-hover:rotate-6">
+                <span className="grid size-14 place-items-center rounded-2xl bg-volt text-ink">
                   {s.id === "online" ? <Smartphone className="size-7" /> : <Dumbbell className="size-7" />}
                 </span>
                 <span className="rounded-full border border-line px-3 py-1 text-xs uppercase tracking-widest text-mute">
@@ -49,11 +49,11 @@ export function Services() {
               <h3 className="font-display-tight text-5xl font-bold">{s.title}</h3>
               <p className="mt-4 text-mute">{s.blurb}</p>
               <ul className="mt-6 space-y-3">
-                {s.points.map((p) => (
-                  <li key={p} className="flex items-start gap-3">
+                {s.points.map((p, k) => (
+                  <Reveal as="li" key={p} delay={0.25 + k * 0.08} y={14} className="flex items-start gap-3">
                     <Check className="mt-0.5 size-5 shrink-0 text-volt" />
                     <span>{p}</span>
-                  </li>
+                  </Reveal>
                 ))}
               </ul>
             </article>
@@ -66,17 +66,13 @@ export function Services() {
 
 export function Method() {
   return (
-    <section id="metodo" className="border-y border-line bg-ink-2">
-      <div className="mx-auto max-w-6xl px-5 py-24">
-        <Reveal>
-          <SectionTitle kicker="Método">
-            Simple, claro y <span className="text-volt">a tu medida</span>
-          </SectionTitle>
-        </Reveal>
+    <section id="metodo" className="border-y border-line">
+      <div className="mx-auto max-w-6xl px-5 py-28">
+        <SectionTitle kicker="Método" title="Simple, claro y *a tu medida*" />
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
-            <Reveal key={s.n} delay={i * 0.08}>
-              <li className="h-full rounded-3xl border border-line bg-ink p-6 transition-colors hover:border-volt/50">
+            <Reveal as="li" key={s.n} delay={i * 0.1} className="list-none">
+              <div className="h-full rounded-3xl border border-line bg-ink-2 p-6 transition-colors hover:border-volt/50">
                 <span
                   className="font-display text-7xl text-transparent"
                   style={{ WebkitTextStroke: "1.5px var(--color-volt)" }}
@@ -85,7 +81,7 @@ export function Method() {
                 </span>
                 <h3 className="mt-3 font-display-tight text-3xl font-bold">{s.title}</h3>
                 <p className="mt-3 text-sm text-mute">{s.text}</p>
-              </li>
+              </div>
             </Reveal>
           ))}
         </ol>
@@ -96,15 +92,11 @@ export function Method() {
 
 export function Results() {
   return (
-    <section id="resultados" className="mx-auto max-w-6xl px-5 py-24">
-      <Reveal>
-        <SectionTitle kicker="Resultados">
-          Personas reales, <span className="text-volt">cambios reales</span>
-        </SectionTitle>
-      </Reveal>
+    <section id="resultados" className="mx-auto max-w-6xl px-5 py-28">
+      <SectionTitle kicker="Resultados" title="Personas reales, *cambios reales*" />
       <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 no-scrollbar md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
         {transformations.map((t, i) => (
-          <Reveal key={t.name} delay={i * 0.1} className="w-[82%] shrink-0 snap-center md:w-auto">
+          <Reveal key={t.name} delay={i * 0.12} className="w-[82%] shrink-0 snap-center md:w-auto">
             <article className="overflow-hidden rounded-3xl border border-line bg-ink-2">
               <div className="grid grid-cols-2 gap-px bg-line">
                 <div className="relative">
@@ -133,33 +125,41 @@ export function Results() {
           </Reveal>
         ))}
       </div>
-      <p className="mt-4 text-xs text-mute">Imágenes y datos provisionales de demostración.</p>
+      <Reveal y={8}>
+        <p className="mt-4 text-xs text-mute">Imágenes y datos provisionales de demostración.</p>
+      </Reveal>
     </section>
   );
 }
 
 export function About() {
   return (
-    <section className="border-y border-line bg-ink-2">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-24 md:grid-cols-2">
-        <Reveal from="left" y={60}>
-          <div className="overflow-hidden rounded-[2rem] border border-line">
+    <section className="border-y border-line">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 py-28 md:grid-cols-2">
+        <Reveal from="left" y={48}>
+          <div className="overflow-hidden rounded-3xl border border-line">
             <Placeholder label="Elena entrenando (demo)" ratio="1/1" tone="volt" />
           </div>
         </Reveal>
-        <Reveal from="right" y={60} delay={0.1}>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-volt">Sobre Elena</p>
-          <h2 className="font-display-tight text-5xl font-extrabold sm:text-6xl">
-            Entrenadora, <span className="text-volt">no gurú</span>
-          </h2>
-          <p className="mt-6 text-lg text-mute">
-            Llevo años acompañando a personas que querían cambiar y no sabían por dónde empezar. Mi método es sencillo:
-            un plan realista, datos para medir y ajustes constantes. Sin dietas milagro ni promesas vacías.
-          </p>
-          <p className="mt-4 text-mute">
-            Texto provisional de demostración. Aquí irá la historia real de Elena y sus certificaciones.
-          </p>
-        </Reveal>
+        <div>
+          <Reveal y={12}>
+            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-volt">
+              <span className="h-px w-8 bg-volt" /> Sobre Elena
+            </p>
+          </Reveal>
+          <RevealText as="h2" text="Entrenadora, *no gurú*" className="font-display-tight text-5xl font-extrabold sm:text-6xl" />
+          <Reveal delay={0.2}>
+            <p className="mt-6 text-lg text-mute">
+              Llevo años acompañando a personas que querían cambiar y no sabían por dónde empezar. Mi método es
+              sencillo: un plan realista, datos para medir y ajustes constantes. Sin dietas milagro ni promesas vacías.
+            </p>
+          </Reveal>
+          <Reveal delay={0.3}>
+            <p className="mt-4 text-mute">
+              Texto provisional de demostración. Aquí irá la historia real de Elena y sus certificaciones.
+            </p>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -167,15 +167,11 @@ export function About() {
 
 export function Testimonials() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-24">
-      <Reveal>
-        <SectionTitle kicker="Opiniones">
-          Lo que dicen <span className="text-volt">mis clientas</span>
-        </SectionTitle>
-      </Reveal>
+    <section className="mx-auto max-w-6xl px-5 py-28">
+      <SectionTitle kicker="Opiniones" title="Lo que dicen *mis clientas*" />
       <div className="grid gap-5 md:grid-cols-3">
         {testimonials.map((t, i) => (
-          <Reveal key={t.name} delay={i * 0.1}>
+          <Reveal key={t.name} delay={i * 0.12}>
             <figure className="h-full rounded-3xl border border-line bg-ink-2 p-7">
               <div className="mb-4 flex gap-1 text-volt" aria-label="5 de 5 estrellas">
                 {Array.from({ length: 5 }).map((_, k) => (

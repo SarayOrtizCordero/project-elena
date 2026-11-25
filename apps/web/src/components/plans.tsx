@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Check } from "lucide-react";
-import { Button, Reveal, cn } from "@elena/ui";
+import { Button, Reveal, RevealText, cn } from "@elena/ui";
 import { plans } from "@/lib/data";
 
 const tabs = [
@@ -19,10 +19,10 @@ export function Plans() {
       <Reveal>
         <div className="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-volt">Planes</p>
-            <h2 className="font-display-tight text-5xl font-extrabold sm:text-6xl lg:text-7xl">
-              Elige tu <span className="text-volt">ritmo</span>
-            </h2>
+            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-volt">
+              <span className="h-px w-8 bg-volt" /> Planes
+            </p>
+            <RevealText as="h2" text="Elige tu *ritmo*" className="font-display-tight text-5xl font-extrabold sm:text-6xl lg:text-7xl" />
           </div>
 
           <div role="tablist" aria-label="Modalidad" className="relative flex rounded-full border border-line bg-ink-2 p-1">
@@ -58,12 +58,16 @@ export function Plans() {
         transition={{ duration: 0.35, ease: "easeOut" }}
         className="grid gap-5 md:grid-cols-3"
       >
-        {plans[mode].map((p) => (
-          <article
+        {plans[mode].map((p, i) => (
+          <motion.article
             key={p.name}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+            transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
-              "relative flex flex-col rounded-[1.75rem] border p-7 transition duration-300 hover:-translate-y-1",
-              p.featured ? "border-volt bg-volt text-ink md:-translate-y-3 md:hover:-translate-y-4" : "border-line bg-ink-2",
+              "relative flex flex-col rounded-3xl border p-7 transition-colors duration-300",
+              p.featured ? "border-volt bg-volt text-ink" : "border-line bg-ink-2 hover:border-volt/50",
             )}
           >
             {p.badge && (
@@ -87,7 +91,7 @@ export function Plans() {
             <Button href="#contacto" variant={p.featured ? "dark" : "primary"} className="mt-8 w-full">
               Empezar
             </Button>
-          </article>
+          </motion.article>
         ))}
       </motion.div>
       <p className="mt-6 text-xs text-mute">Precios provisionales de demostración.</p>
