@@ -36,7 +36,7 @@ export function Plans() {
             <RevealText
               as="h2"
               text="Elige tu *ritmo*"
-              accentClassName="text-brand-2"
+              accentClassName="text-accent"
               className="font-display-tight text-3xl font-extrabold sm:text-5xl lg:text-6xl"
             />
           </div>
@@ -57,7 +57,7 @@ export function Plans() {
                 onKeyDown={(e) => onKey(e, i)}
                 className={cn(
                   "relative z-10 h-11 rounded-full px-6 font-display text-lg uppercase tracking-wide transition-colors",
-                  mode === t.id ? "text-white" : "text-mute hover:text-white",
+                  mode === t.id ? "text-black" : "text-mute hover:text-white",
                 )}
               >
                 {mode === t.id && (
@@ -92,28 +92,28 @@ export function Plans() {
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className={cn(
                 "relative flex flex-col rounded-2xl border p-7",
-                p.featured ? "border-brand bg-brand text-white" : "border-line bg-ink-2",
+                p.featured ? "border-brand bg-brand text-black" : "border-line bg-ink-2",
               )}
             >
               {p.badge && (
-                <span className="absolute -top-3 left-7 rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-brand">
+                <span className="absolute -top-3 left-7 rounded-full bg-black px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-accent">
                   {p.badge}
                 </span>
               )}
               <h3 className="font-display-tight text-3xl font-extrabold">{p.name}</h3>
               <p className="mt-5 flex items-baseline gap-1.5">
                 <span className="font-display text-6xl font-extrabold leading-none tabular-nums">{p.price}€</span>
-                <span className={cn("text-sm", p.featured ? "text-white" : "text-mute")}>{p.unit}</span>
+                <span className={cn("text-sm", p.featured ? "text-black" : "text-mute")}>{p.unit}</span>
               </p>
               <ul className="mt-6 flex-1 space-y-3">
                 {p.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm">
-                    <Check className={cn("mt-0.5 size-4 shrink-0", p.featured ? "text-white" : "text-accent")} aria-hidden />
+                    <Check className={cn("mt-0.5 size-4 shrink-0", p.featured ? "text-black" : "text-accent")} aria-hidden />
                     {f}
                   </li>
                 ))}
               </ul>
-              <Button href="#contacto" variant={p.featured ? "light" : "brand"} className="mt-8 w-full">
+              <Button href="#contacto" variant={p.featured ? "ink" : "brand"} className="mt-8 w-full">
                 Empezar<span className="sr-only"> con el plan {p.name}</span>
               </Button>
             </motion.article>

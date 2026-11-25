@@ -44,8 +44,8 @@ export function LineChart({ data, unit = "kg", height = 220 }: { data: Point[]; 
     <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`Evolución en ${unit}`}>
       <defs>
         <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#fb8603" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#fb8603" stopOpacity="0" />
+          <stop offset="0%" stopColor="#FAA307" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#FAA307" stopOpacity="0" />
         </linearGradient>
       </defs>
 

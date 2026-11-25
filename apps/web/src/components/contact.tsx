@@ -39,7 +39,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contacto" className="relative bg-brand text-white">
+    <section id="contacto" className="relative bg-brand text-black">
       <TornEdge className="text-brand" variant={1} />
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:py-32 lg:grid-cols-2">
         <div>
@@ -51,7 +51,7 @@ export function Contact() {
           <RevealText
             as="h2"
             text="Tu primer paso, *ahora*"
-            accentClassName="text-white"
+            accentClassName="text-transparent [-webkit-text-stroke:2px_#000]"
             className="font-display-tight text-3xl font-extrabold sm:text-5xl lg:text-6xl"
           />
           <Reveal delay={0.2}>
@@ -59,7 +59,7 @@ export function Contact() {
               Cuéntame tu objetivo y te respondo con una propuesta a tu medida.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href={WHATSAPP_URL} variant="light" size="lg">
+              <Button href={WHATSAPP_URL} variant="ink" size="lg">
                 Escríbeme por WhatsApp
               </Button>
             </div>
@@ -161,7 +161,7 @@ export function Contact() {
                         name="consent"
                         aria-invalid={!!errors.consent}
                         aria-describedby={errors.consent ? "consent-err" : undefined}
-                        className="mt-0.5 size-5 shrink-0 accent-[#fb8603]"
+                        className="mt-0.5 size-5 shrink-0 accent-[#FAA307]"
                       />
                       <span>Acepto que traten mis datos para contactarme (política de privacidad por publicar).</span>
                     </label>

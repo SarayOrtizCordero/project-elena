@@ -21,7 +21,7 @@ export function Faq() {
           <RevealText
             as="h2"
             text="Preguntas *frecuentes*"
-            accentClassName="text-brand-2"
+            accentClassName="text-accent"
             className="font-display-tight text-3xl font-extrabold sm:text-5xl lg:text-6xl"
           />
         </div>

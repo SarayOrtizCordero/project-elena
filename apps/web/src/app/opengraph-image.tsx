@@ -7,7 +7,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function OpengraphImage() {
-  const badge = readFileSync(join(process.cwd(), "public", "brand", "logo-badge-white.png"));
+  const badge = readFileSync(join(process.cwd(), "public", "brand", "logo-badge-ink.png"));
   const src = `data:image/png;base64,${badge.toString("base64")}`;
   return new ImageResponse(
     (
@@ -18,8 +18,8 @@ export default function OpengraphImage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "#bb2234",
-          color: "#fff",
+          background: "#faa307",
+          color: "#000",
           padding: "64px 80px",
         }}
       >

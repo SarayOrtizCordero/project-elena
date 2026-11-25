@@ -64,7 +64,7 @@ export function Header() {
                     aria-current={on ? "location" : undefined}
                     className={cn(
                       "flex h-10 items-center rounded-full px-4 text-sm font-semibold transition-colors",
-                      on ? "bg-brand text-white" : "text-bone/80 hover:text-white",
+                      on ? "bg-brand text-black" : "text-bone/80 hover:text-white",
                     )}
                   >
                     {l.label}

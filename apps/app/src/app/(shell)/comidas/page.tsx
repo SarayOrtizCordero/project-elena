@@ -144,7 +144,7 @@ export default function Comidas() {
         whileTap={{ scale: 0.92 }}
         onClick={() => setOpen(true)}
         aria-label="Añadir alimento"
-        className="fixed bottom-24 right-5 z-40 grid size-14 place-items-center rounded-full bg-volt text-ink shadow-[0_10px_30px_rgb(251_134_3/0.35)] lg:bottom-8 lg:right-8"
+        className="fixed bottom-24 right-5 z-40 grid size-14 place-items-center rounded-full bg-volt text-ink shadow-[0_10px_30px_rgb(250_163_7/0.35)] lg:bottom-8 lg:right-8"
       >
         <Plus className="size-7" />
       </motion.button>

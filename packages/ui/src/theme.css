@@ -12,22 +12,23 @@
   --color-ink-2: #0b0b0c;
   --color-ink-3: #161617;
   --color-line: #232326;
-  --color-bone: #f6f5ef;
-  --color-mute: #a1a1aa;
-  /* Acento naranja: 8,5:1 sobre negro (válido para texto pequeño). `volt` es el nombre histórico. */
-  --color-volt: #fb8603;
-  --color-volt-2: #ff9d2e;
-  --color-volt-dim: #b45f00;
-  --color-accent: #fb8603;
-  /* Rojo de marca: 6,2:1 con texto blanco (botones/bloques); sobre negro solo en texto grande. */
-  --color-brand: #bb2234;
-  --color-brand-2: #d12b40;
-  --color-brand-deep: #8f1727;
-  /* Papel claro para secciones alternas */
-  --color-paper: #f2efe9;
-  --color-paper-ink: #111111;
-  --color-paper-mute: #55555c;
-  --color-paper-line: #d9d4ca;
+  --color-bone: #ffffff;
+  --color-mute: #a3a3a3;
+  /* Paleta de marca: #FAA307 · #FFFFFF · #000000.
+     Ámbar sobre negro 10,3:1 · negro sobre ámbar 10,3:1 · blanco sobre ámbar 2:1 (NO usar). */
+  --color-volt: #faa307;
+  --color-volt-2: #ffb733;
+  --color-volt-dim: #c47f00;
+  --color-accent: #faa307;
+  /* `brand` = relleno ámbar (botones, bloques, hero): siempre con texto negro. */
+  --color-brand: #faa307;
+  --color-brand-2: #ffb733;
+  --color-brand-deep: #c47f00;
+  /* Secciones claras alternas: blanco puro con texto negro */
+  --color-paper: #ffffff;
+  --color-paper-ink: #000000;
+  --color-paper-mute: #4a4a4a;
+  --color-paper-line: #ececec;
   --color-ok: #4ade80;
   --color-bad: #f87171;
 
@@ -53,10 +54,10 @@
   }
   @keyframes pulse-ring {
     0% {
-      box-shadow: 0 0 0 0 rgb(251 134 3 / 0.45);
+      box-shadow: 0 0 0 0 rgb(250 163 7 / 0.45);
     }
     100% {
-      box-shadow: 0 0 0 18px rgb(251 134 3 / 0);
+      box-shadow: 0 0 0 18px rgb(250 163 7 / 0);
     }
   }
 }

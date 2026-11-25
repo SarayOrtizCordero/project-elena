@@ -11,8 +11,8 @@ function Kicker({ children, tone = "dark" }: { children: React.ReactNode; tone?:
         className={cn(
           "mb-4 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em]",
           tone === "dark" && "text-accent",
-          tone === "paper" && "text-brand",
-          tone === "red" && "text-white",
+          tone === "paper" && "text-paper-ink",
+          tone === "red" && "text-black",
         )}
       >
         <span className="h-px w-8 bg-current" aria-hidden /> {children}
@@ -54,7 +54,7 @@ export function Why() {
       <TornEdge className="text-paper" variant={0} />
       <div className="mx-auto max-w-7xl px-5 py-24 sm:py-32">
         <Kicker tone="paper">Por qué elegirme</Kicker>
-        <RevealText as="h2" text="Entrenar con cabeza, *no a ciegas*" accentClassName="text-brand" className={cn(h2, "max-w-3xl")} />
+        <RevealText as="h2" text="Entrenar con cabeza, *no a ciegas*" accentClassName="bg-brand px-[0.12em] text-black" className={cn(h2, "max-w-3xl")} />
 
         <div className="relative mt-14">
           <p
@@ -70,14 +70,14 @@ export function Why() {
                   <article
                     className={cn(
                       "h-full p-6 shadow-[0_18px_40px_-18px_rgb(0_0_0/0.45)] lg:min-h-[250px]",
-                      i === 1 ? "bg-brand text-white" : i === 3 ? "bg-black text-white" : "bg-white text-paper-ink",
+                      i === 1 ? "bg-brand text-black" : i === 3 ? "bg-black text-white" : "bg-white text-paper-ink",
                     )}
                   >
-                    <p className={cn("font-display text-sm font-bold tracking-widest", i === 3 ? "text-accent" : i === 1 ? "text-white" : "text-brand")}>
+                    <p className={cn("font-display text-sm font-bold tracking-widest", i === 3 ? "text-accent" : "text-black")}>
                       {c.n}
                     </p>
                     <h3 className="font-display-tight mt-3 text-2xl font-extrabold">{c.title}</h3>
-                    <p className={cn("mt-3 text-sm leading-relaxed", i === 1 || i === 3 ? "text-white" : "text-paper-mute")}>{c.text}</p>
+                    <p className={cn("mt-3 text-sm leading-relaxed", i === 1 ? "text-black" : i === 3 ? "text-white" : "text-paper-mute")}>{c.text}</p>
                   </article>
                 </Reveal>
               </li>
@@ -97,7 +97,7 @@ export function Services() {
       <div className="mx-auto max-w-7xl px-5 py-24 sm:py-32">
         <div className="mb-14 max-w-2xl">
           <Kicker>Servicios</Kicker>
-          <RevealText as="h2" text="Dos formas de *llegar a tu meta*" accentClassName="text-brand-2" className={h2} />
+          <RevealText as="h2" text="Dos formas de *llegar a tu meta*" accentClassName="text-accent" className={h2} />
         </div>
         <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
           {services.map((s, i) => (
@@ -136,7 +136,7 @@ export function Method() {
       <div className="mx-auto max-w-7xl px-5 py-24 sm:py-32">
         <div className="mb-14 max-w-2xl">
           <Kicker>Método</Kicker>
-          <RevealText as="h2" text="Simple, claro y *a tu medida*" accentClassName="text-brand-2" className={h2} />
+          <RevealText as="h2" text="Simple, claro y *a tu medida*" accentClassName="text-accent" className={h2} />
         </div>
         <ol className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
@@ -168,7 +168,7 @@ export function Gallery() {
       <div className="mx-auto max-w-7xl px-5 py-24 sm:py-32">
         <div className="mb-14 max-w-2xl">
           <Kicker>Galería</Kicker>
-          <RevealText as="h2" text="Así se *entrena* aquí" accentClassName="text-brand-2" className={h2} />
+          <RevealText as="h2" text="Así se *entrena* aquí" accentClassName="text-accent" className={h2} />
         </div>
         <ul className="grid auto-rows-[150px] grid-cols-2 gap-3 sm:auto-rows-[200px] md:grid-cols-4 md:gap-4">
           {gallery.map((g, i) => (
@@ -219,7 +219,7 @@ export function About() {
         </Reveal>
         <div>
           <Kicker tone="paper">Sobre Elena</Kicker>
-          <RevealText as="h2" text="Entrenadora, *no gurú*" accentClassName="text-brand" className={h2} />
+          <RevealText as="h2" text="Entrenadora, *no gurú*" accentClassName="bg-brand px-[0.12em] text-black" className={h2} />
           <Reveal delay={0.2}>
             <p className="mt-6 text-lg text-paper-ink">
               Acompaño a personas que quieren cambiar y no saben por dónde empezar. Mi método es sencillo: un plan
@@ -245,7 +245,7 @@ export function Testimonials() {
       <div className="mx-auto max-w-7xl px-5 py-24 sm:py-32">
         <div className="mb-14 max-w-2xl">
           <Kicker>Opiniones</Kicker>
-          <RevealText as="h2" text="Lo que dirán *mis clientas*" accentClassName="text-brand-2" className={h2} />
+          <RevealText as="h2" text="Lo que dirán *mis clientas*" accentClassName="text-accent" className={h2} />
         </div>
         <div className="grid gap-5 md:grid-cols-3">
           {testimonials.map((t, i) => (

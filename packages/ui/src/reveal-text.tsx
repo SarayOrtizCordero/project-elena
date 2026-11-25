@@ -77,7 +77,7 @@ export function RevealText({
         w === "br" ? (
           <br key={i} />
         ) : (
-          <span key={i} className="mr-[0.22em] inline-block overflow-hidden pb-[0.1em] pt-[0.04em] align-bottom -mb-[0.1em]">
+          <span key={i} className="mr-[0.22em] inline-block overflow-hidden pb-[0.2em] pt-[0.04em] align-bottom -mb-[0.2em]">
             <motion.span variants={word} className="inline-block">
               {w.map((p, k) =>
                 p.a ? (
