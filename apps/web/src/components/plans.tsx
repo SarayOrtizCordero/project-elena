@@ -24,7 +24,8 @@ export function Plans() {
   }
 
   return (
-    <section id="planes" className="border-t border-line">
+    <section id="planes" className="relative isolate overflow-hidden border-t border-line">
+      <div aria-hidden className="pointer-events-none absolute -z-10 left-1/2 top-[45%] size-[30rem] -translate-x-1/2 rounded-full bg-accent/15 blur-[130px]" />
       <div className="mx-auto max-w-7xl px-5 py-24 sm:py-32">
         <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
@@ -92,7 +93,7 @@ export function Plans() {
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className={cn(
                 "relative flex flex-col rounded-2xl border p-7",
-                p.featured ? "border-brand bg-brand text-black" : "border-line bg-ink-2",
+                p.featured ? "border-brand bg-brand text-black" : "glass",
               )}
             >
               {p.badge && (

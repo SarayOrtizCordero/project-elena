@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   title,
   description,
   applicationName: "Elena Fit",
-  openGraph: { title, description, type: "website", locale: "es_ES", siteName: "Elena Fit" },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: { title: `${title} · Demo 1`, description, type: "website", locale: "es_ES", siteName: "Elena Fit" },
+  twitter: { card: "summary_large_image", title: `${title} · Demo 1`, description },
 };
 
 export const viewport: Viewport = {

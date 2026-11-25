@@ -23,6 +23,11 @@ function Kicker({ children, tone = "dark" }: { children: React.ReactNode; tone?:
 
 const h2 = "font-display-tight text-3xl font-extrabold sm:text-5xl lg:text-6xl";
 
+/** Resplandor ámbar tras el contenido: da al cristal algo que desenfocar. */
+function Glow({ className }: { className?: string }) {
+  return <div aria-hidden className={cn("pointer-events-none absolute -z-10 size-[26rem] rounded-full bg-accent/15 blur-[120px]", className)} />;
+}
+
 /* ───────────── Cinta ───────────── */
 export function Marquee() {
   const row = [...marquee, ...marquee];
@@ -134,7 +139,8 @@ export function Services() {
 /* ───────────── Método ───────────── */
 export function Method() {
   return (
-    <section id="metodo" className="border-t border-line">
+    <section id="metodo" className="relative isolate border-t border-line">
+      <Glow className="left-[8%] top-[25%]" />
       <div className="mx-auto max-w-7xl px-5 py-24 sm:py-32">
         <div className="mb-14 max-w-2xl">
           <Kicker>Método</Kicker>
@@ -144,7 +150,7 @@ export function Method() {
           {steps.map((s, i) => (
             <li key={s.n}>
               <Reveal delay={i * 0.1}>
-                <div className="border-t-2 border-brand pt-6">
+                <div className="glass h-full rounded-2xl p-6">
                   <span aria-hidden className="font-display text-7xl font-extrabold text-transparent [-webkit-text-stroke:1.5px_var(--color-accent)]">
                     {s.n}
                   </span>
@@ -242,8 +248,9 @@ export function About() {
 /* ───────────── Opiniones ───────────── */
 export function Testimonials() {
   return (
-    <section id="opiniones" className="relative bg-black">
+    <section id="opiniones" className="relative isolate bg-black">
       <TornEdge className="text-black" variant={0} />
+      <Glow className="right-[6%] top-[30%]" />
       <div className="mx-auto max-w-7xl px-5 py-24 sm:py-32">
         <div className="mb-14 max-w-2xl">
           <Kicker>Opiniones</Kicker>
@@ -252,7 +259,7 @@ export function Testimonials() {
         <div className="grid gap-5 md:grid-cols-3">
           {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.12}>
-              <figure className="h-full rounded-2xl border border-line bg-ink-2 p-7">
+              <figure className="glass h-full rounded-2xl p-7">
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex gap-1 text-accent" role="img" aria-label="5 de 5 estrellas">
                     {Array.from({ length: 5 }).map((_, k) => (

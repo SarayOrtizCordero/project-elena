@@ -57,7 +57,7 @@ export function Header() {
         />
       )}
     </AnimatePresence>
-    <header className="glass-strong fixed inset-x-0 top-0 z-50 border-x-0 border-t-0">
+    <header className="glass-nav fixed inset-x-0 top-0 z-50 border-b border-white/10">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5">
         <a href="#inicio" aria-label="Elena Fit, ir al inicio" onClick={() => setOpen(false)} className="shrink-0">
           <Logo />
@@ -117,7 +117,7 @@ export function Header() {
               exit={{ opacity: 0, y: -10, scale: 0.97 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               style={{ transformOrigin: "top right" }}
-              className="glass-strong absolute right-3 top-[calc(100%+0.5rem)] w-[min(19rem,calc(100vw-1.5rem))] rounded-3xl p-3 xl:hidden"
+              className="glass-nav absolute right-3 border border-white/10 top-[calc(100%+0.5rem)] w-[min(19rem,calc(100vw-1.5rem))] rounded-3xl p-3 xl:hidden"
             >
               <ul>
                 {nav.map((l, i) => {
