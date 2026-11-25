@@ -7,6 +7,7 @@ export const WHATSAPP_URL = "https://wa.me/34600000000?text=Hola%20Elena%2C%20qu
 export const nav = [
   { id: "servicios", label: "Servicios" },
   { id: "metodo", label: "Método" },
+  { id: "app", label: "App" },
   { id: "planes", label: "Planes" },
   { id: "galeria", label: "Galería" },
   { id: "faq", label: "Dudas" },
@@ -14,7 +15,7 @@ export const nav = [
 ];
 
 /** Todas las secciones observadas por el menú (las que no están en `nav` no resaltan nada). */
-export const spyIds = ["inicio", "por-que", "servicios", "metodo", "planes", "galeria", "sobre-elena", "opiniones", "faq", "contacto"];
+export const spyIds = ["inicio", "por-que", "servicios", "metodo", "app", "planes", "galeria", "sobre-elena", "opiniones", "faq", "contacto"];
 
 export const marquee = ["Fuerza", "Constancia", "Nutrición", "Presencial", "Online", "Seguimiento"];
 
@@ -51,6 +52,20 @@ export const steps = [
   { n: "02", title: "Recibe tu plan", text: "Rutina y alimentación diseñadas para ti, listas en tu app." },
   { n: "03", title: "Entrena y registra", text: "Marca series, anota comidas y sube tu peso. Todo en un par de toques." },
   { n: "04", title: "Ajustamos juntas", text: "Reviso tus datos y adapto el plan para que no te estanques." },
+];
+
+export const appPoints = [
+  { title: "Tu entreno del día", text: "Marca cada serie y usa el temporizador de descanso entre ejercicios." },
+  { title: "Comidas y calorías", text: "Tu plan de comidas con calorías y macros. Añade lo que comas fuera de plan." },
+  { title: "Progreso a la vista", text: "Registra tu peso y mira tu evolución en una gráfica clara." },
+  { title: "Elena te acompaña", text: "Ella ve tu progreso y ajusta tu plan cuando lo necesitas." },
+];
+
+/** Instalar la app = añadirla a la pantalla de inicio desde el navegador (PWA), sin tiendas. */
+export const installSteps = [
+  { os: "Android", how: "En Chrome: menú ⋮ → «Instalar app»." },
+  { os: "iPhone", how: "En Safari: botón Compartir → «Añadir a pantalla de inicio»." },
+  { os: "Ordenador", how: "En Chrome o Edge: icono de instalar en la barra de direcciones." },
 ];
 
 export type Plan = {

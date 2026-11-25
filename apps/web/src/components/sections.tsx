@@ -106,20 +106,22 @@ export function Services() {
                 <div className="absolute inset-0 -z-10">
                   <Photo src={s.photo} alt={s.alt} sizes="(min-width: 1024px) 50vw, 100vw" className="size-full" />
                 </div>
-                <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/70 to-black/10" />
-                <span className="absolute left-7 top-7 rounded-full bg-black px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-accent sm:left-9 sm:top-9">
+                <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+                <span className="glass absolute left-6 top-6 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-accent sm:left-8 sm:top-8">
                   {s.tag}
                 </span>
-                <h3 className="font-display-tight text-3xl font-extrabold min-[400px]:text-4xl sm:text-5xl lg:text-6xl">{s.title}</h3>
-                <p className="mt-4 max-w-md text-bone">{s.blurb}</p>
-                <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
-                  {s.points.map((p) => (
-                    <li key={p} className="flex items-start gap-2.5 text-sm">
-                      <Check className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
+                <div className="glass-strong rounded-2xl p-6 sm:p-7">
+                  <h3 className="font-display-tight text-3xl font-extrabold min-[400px]:text-4xl sm:text-5xl lg:text-6xl">{s.title}</h3>
+                  <p className="mt-4 max-w-md text-bone">{s.blurb}</p>
+                  <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
+                    {s.points.map((p) => (
+                      <li key={p} className="flex items-start gap-2.5 text-sm">
+                        <Check className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </article>
             </Reveal>
           ))}
@@ -182,7 +184,7 @@ export function Gallery() {
                     className="size-full"
                     imgClassName="transition-transform duration-700 group-hover:scale-105"
                   />
-                  <figcaption className="absolute bottom-3 left-3 rounded-full bg-black px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">
+                  <figcaption className="glass absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">
                     {g.label}
                   </figcaption>
                 </figure>

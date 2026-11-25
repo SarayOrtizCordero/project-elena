@@ -31,7 +31,6 @@ export function Header() {
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
     if (open) firstLinkRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && open) {
@@ -40,21 +39,32 @@ export function Header() {
       }
     };
     window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-black">
+    <>
+    <AnimatePresence>
+      {open && (
+        <motion.button
+          aria-label="Cerrar menú"
+          tabIndex={-1}
+          onClick={() => setOpen(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-x-0 bottom-0 top-16 z-40 bg-black/50 backdrop-blur-[2px] xl:hidden"
+        />
+      )}
+    </AnimatePresence>
+    <header className="glass-strong fixed inset-x-0 top-0 z-50 border-x-0 border-t-0">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5">
         <a href="#inicio" aria-label="Elena Fit, ir al inicio" onClick={() => setOpen(false)} className="shrink-0">
           <Logo />
         </a>
 
-        <nav className="hidden lg:block" aria-label="Principal">
-          <ul className="flex items-center gap-1 rounded-full border border-line bg-ink-2 p-1">
+        <nav className="hidden xl:block" aria-label="Principal">
+          <ul className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1">
             {nav.map((l) => {
               const on = current === l.id;
               return (
@@ -75,7 +85,7 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <Button href={APP_URL} variant="ghost">
             Acceso clientes
           </Button>
@@ -86,7 +96,7 @@ export function Header() {
 
         <button
           ref={buttonRef}
-          className="grid size-11 place-items-center rounded-full border border-line bg-ink-2 lg:hidden"
+          className="grid size-11 place-items-center rounded-full border border-white/15 bg-white/5 xl:hidden"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           aria-controls="menu-movil"
@@ -96,55 +106,52 @@ export function Header() {
         </button>
       </div>
 
+      {/* Menú móvil: desplegable compacto bajo la barra, no pantalla completa */}
       <AnimatePresence>
         {open && (
-          <motion.nav
-            id="menu-movil"
-            aria-label="Menú móvil"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
-            className="fixed inset-x-0 bottom-0 top-16 flex flex-col overflow-y-auto bg-black px-5 pb-8 pt-4 lg:hidden"
-          >
-            <ul>
-              {nav.map((l, i) => {
-                const on = current === l.id;
-                return (
-                  <motion.li
-                    key={l.id}
-                    initial={{ opacity: 0, x: -14 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.04 * i + 0.05 }}
-                  >
-                    <a
-                      ref={i === 0 ? firstLinkRef : undefined}
-                      href={`#${l.id}`}
-                      aria-current={on ? "location" : undefined}
-                      onClick={() => setOpen(false)}
-                      className={cn(
-                        "flex items-center justify-between border-b border-line py-4 font-display-tight text-3xl font-extrabold",
-                        on ? "text-accent" : "text-white",
-                      )}
-                    >
-                      {l.label}
-                      {on && <span aria-hidden className="size-2.5 rounded-full bg-accent" />}
-                    </a>
-                  </motion.li>
-                );
-              })}
-            </ul>
-            <div className="mt-auto flex flex-col gap-3 pt-8">
-              <Button href="#contacto" variant="brand" size="lg" onClick={() => setOpen(false)}>
-                Reservar
-              </Button>
-              <Button href={APP_URL} variant="ghost" size="lg">
-                Acceso clientes
-              </Button>
-            </div>
-          </motion.nav>
+                      <motion.nav
+              id="menu-movil"
+              aria-label="Menú móvil"
+              initial={{ opacity: 0, y: -10, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.97 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              style={{ transformOrigin: "top right" }}
+              className="glass-strong absolute right-3 top-[calc(100%+0.5rem)] w-[min(19rem,calc(100vw-1.5rem))] rounded-3xl p-3 xl:hidden"
+            >
+              <ul>
+                {nav.map((l, i) => {
+                  const on = current === l.id;
+                  return (
+                    <li key={l.id}>
+                      <a
+                        ref={i === 0 ? firstLinkRef : undefined}
+                        href={`#${l.id}`}
+                        aria-current={on ? "location" : undefined}
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                          "flex min-h-12 items-center justify-between rounded-2xl px-4 text-lg font-semibold transition-colors",
+                          on ? "bg-brand text-black" : "text-white hover:bg-white/10",
+                        )}
+                      >
+                        {l.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="mt-2 grid gap-2 border-t border-white/10 pt-3">
+                <Button href="#contacto" variant="brand" onClick={() => setOpen(false)}>
+                  Reservar
+                </Button>
+                <Button href={APP_URL} variant="ghost">
+                  Acceso clientes
+                </Button>
+              </div>
+            </motion.nav>
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 }
