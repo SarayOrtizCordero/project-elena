@@ -7,8 +7,10 @@ import { Button, Reveal, RevealText, cn } from "@elena/ui";
 import { plans } from "@/lib/data";
 
 const tabs = [
+  { id: "presencial", label: "Personal" },
   { id: "online", label: "Online" },
-  { id: "presencial", label: "Presencial" },
+  { id: "nutricion", label: "Nutrición" },
+  { id: "combo", label: "Combo" },
 ] as const;
 
 export function Plans() {
@@ -42,7 +44,7 @@ export function Plans() {
             />
           </div>
 
-          <div role="tablist" aria-label="Modalidad" className="relative flex rounded-full border border-line bg-ink-2 p-1">
+          <div role="tablist" aria-label="Modalidad" className="relative flex w-full rounded-full md:w-auto border border-line bg-ink-2 p-1">
             {tabs.map((t, i) => (
               <button
                 key={t.id}
@@ -57,7 +59,7 @@ export function Plans() {
                 onClick={() => setMode(t.id)}
                 onKeyDown={(e) => onKey(e, i)}
                 className={cn(
-                  "relative z-10 h-11 rounded-full px-6 font-display text-lg uppercase tracking-wide transition-colors",
+                  "relative z-10 h-11 flex-1 rounded-full px-1 font-display text-sm uppercase tracking-wide transition-colors min-[400px]:text-base sm:px-6 sm:text-lg md:flex-none",
                   mode === t.id ? "text-black" : "text-mute hover:text-white",
                 )}
               >

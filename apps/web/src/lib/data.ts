@@ -17,7 +17,7 @@ export const nav = [
 /** Todas las secciones observadas por el menú (las que no están en `nav` no resaltan nada). */
 export const spyIds = ["inicio", "por-que", "servicios", "metodo", "app", "planes", "galeria", "sobre-elena", "opiniones", "faq", "contacto"];
 
-export const marquee = ["Fuerza", "Constancia", "Nutrición", "Presencial", "Online", "Seguimiento"];
+export const marquee = ["Entreno personal", "Online", "Nutrición", "Combo", "Constancia", "Seguimiento"];
 
 export const why = [
   { n: "01", title: "Un plan hecho para ti", text: "Rutina y comidas según tu objetivo, tu nivel y tu día a día." },
@@ -29,21 +29,39 @@ export const why = [
 export const services = [
   {
     id: "presencial",
-    title: "Presencial",
+    title: "Entreno personal",
     tag: "En el gym",
     photo: "/photos/trainer.jpg",
     alt: "Entrenador guiando a una mujer en una máquina de remo",
     blurb: "Sesiones en sala con corrección técnica en directo y alguien que marca el ritmo a tu lado.",
-    points: ["Sesiones 1:1 o en grupo reducido", "Técnica corregida al momento", "Valoración física inicial", "Plan de nutrición incluido"],
+    points: ["Sesiones 1:1 o en grupo reducido", "Técnica corregida al momento", "Valoración física inicial", "Rutina a tu medida"],
   },
   {
     id: "online",
-    title: "Online",
+    title: "Entreno online",
     tag: "Desde donde estés",
     photo: "/photos/online.jpg",
     alt: "Mujer consultando su móvil en un gimnasio",
-    blurb: "Tu rutina, tus comidas y tu progreso en una app. Ajusto tu plan cada semana según tus datos.",
-    points: ["Rutina guiada paso a paso", "Plan de comidas y calorías", "Seguimiento semanal personalizado", "Contacto directo con Elena"],
+    blurb: "Tu rutina y tu progreso en una app. Ajusto tu plan cada semana según tus datos.",
+    points: ["Rutina guiada paso a paso", "Vídeos de cada ejercicio", "Seguimiento semanal personalizado", "Contacto directo con Elena"],
+  },
+  {
+    id: "nutricion",
+    title: "Nutrición",
+    tag: "Tu alimentación",
+    photo: null,
+    alt: "",
+    blurb: "Un plan de comidas realista, con calorías y macros, que puedas cumplir sin pasar hambre ni contar cada gramo.",
+    points: ["Plan de comidas a tu medida", "Calorías y macros calculados", "Lista de la compra semanal", "Ajustes según tu progreso"],
+  },
+  {
+    id: "combo",
+    title: "Combo completo",
+    tag: "Lo más completo",
+    photo: "/photos/mirror.jpg",
+    alt: "Dos mujeres levantando mancuernas frente al espejo",
+    blurb: "Entrenamiento y nutrición en un solo plan, coordinados entre sí y con un único seguimiento.",
+    points: ["Entreno + nutrición coordinados", "Un solo plan y un solo seguimiento", "Presencial u online", "Todo en tu app"],
   },
 ];
 
@@ -78,7 +96,7 @@ export type Plan = {
 };
 
 /** Precios de EJEMPLO: por confirmar con Elena. */
-export const plans: Record<"online" | "presencial", Plan[]> = {
+export const plans: Record<"online" | "presencial" | "nutricion" | "combo", Plan[]> = {
   online: [
     { name: "Esencial", price: 29, unit: "/mes", features: ["Rutina personalizada", "Plan de comidas", "App de seguimiento", "Soporte por email"] },
     {
@@ -103,6 +121,30 @@ export const plans: Record<"online" | "presencial", Plan[]> = {
     },
     { name: "Híbrido", price: 160, unit: "/mes", features: ["8 sesiones + online", "Ajustes semanales", "App y mensajes sin límite", "Prioridad de agenda"] },
   ],
+  nutricion: [
+    { name: "Plan base", price: 25, unit: "/mes", features: ["Plan de comidas personalizado", "Calorías y macros", "Lista de la compra", "Soporte por email"] },
+    {
+      name: "Seguimiento",
+      price: 45,
+      unit: "/mes",
+      badge: "Más elegido",
+      featured: true,
+      features: ["Todo lo del plan base", "Ajustes semanales", "Contacto directo con Elena", "Revisión de tus registros"],
+    },
+    { name: "Trimestral", price: 120, unit: "/3 meses", features: ["Todo lo de Seguimiento", "Ahorro frente al mensual", "Videollamada de inicio", "Prioridad en respuestas"] },
+  ],
+  combo: [
+    { name: "Combo online", price: 69, unit: "/mes", features: ["Rutina + plan de comidas", "App de seguimiento", "Ajustes semanales", "Soporte por email"] },
+    {
+      name: "Combo presencial",
+      price: 150,
+      unit: "/mes",
+      badge: "Más elegido",
+      featured: true,
+      features: ["8 sesiones al mes", "Plan de nutrición completo", "Valoración y medidas", "Acceso a la app", "Contacto directo con Elena"],
+    },
+    { name: "Combo total", price: 190, unit: "/mes", features: ["8 sesiones + online", "Nutrición con seguimiento", "Ajustes semanales", "Prioridad de agenda"] },
+  ],
 };
 
 export const gallery = [
@@ -125,6 +167,7 @@ export const faqs = [
   { q: "¿Necesito experiencia previa?", a: "No. Adapto todo a tu nivel, desde cero hasta avanzado, con explicaciones de cada ejercicio." },
   { q: "¿Puedo entrenar en casa?", a: "Sí. Si eliges online, tu rutina se diseña con el material que tengas: gimnasio, casa o mancuernas." },
   { q: "¿Cómo recibo mi plan?", a: "Rellenas el cuestionario y recibes en tu app la rutina, las comidas y la lista de la compra." },
+  { q: "¿Puedo contratar solo nutrición?", a: "Sí. La nutrición se puede contratar sola o combinada con el entrenamiento en el combo completo." },
   { q: "¿Se puede cancelar?", a: "Sí, sin permanencia. Avisas con unos días de antelación y no se renueva." },
   { q: "¿Qué pasa si tengo una lesión?", a: "Me lo cuentas en el cuestionario y adapto los ejercicios. Si hace falta, te recomiendo consultar antes con tu médico." },
 ];

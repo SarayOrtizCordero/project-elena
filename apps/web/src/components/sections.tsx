@@ -1,4 +1,4 @@
-import { Check, Star } from "lucide-react";
+import { Check, Salad, Star } from "lucide-react";
 import { Reveal, RevealText, cn } from "@elena/ui";
 import { gallery, marquee, services, steps, testimonials, why } from "@/lib/data";
 import { Photo } from "./photo";
@@ -102,21 +102,29 @@ export function Services() {
       <div className="mx-auto max-w-7xl px-5 py-24 sm:py-32">
         <div className="mb-14 max-w-2xl">
           <Kicker>Servicios</Kicker>
-          <RevealText as="h2" text="Dos formas de *llegar a tu meta*" accentClassName="text-accent" className={h2} />
+          <RevealText as="h2" text="Cuatro formas de *llegar a tu meta*" accentClassName="text-accent" className={h2} />
         </div>
         <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
           {services.map((s, i) => (
             <Reveal key={s.id} delay={i * 0.12}>
-              <article className="relative isolate flex min-h-[560px] flex-col justify-end overflow-hidden rounded-2xl border border-line p-7 sm:p-9">
-                <div className="absolute inset-0 -z-10">
-                  <Photo src={s.photo} alt={s.alt} sizes="(min-width: 1024px) 50vw, 100vw" className="size-full" />
-                </div>
-                <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
-                <span className="glass absolute left-6 top-6 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-accent sm:left-8 sm:top-8">
+              <article className="relative isolate flex min-h-[520px] flex-col justify-end overflow-hidden rounded-2xl border border-line p-7 sm:p-9">
+                {s.photo ? (
+                  <>
+                    <div className="absolute inset-0 -z-10">
+                      <Photo src={s.photo} alt={s.alt} sizes="(min-width: 1024px) 50vw, 100vw" className="size-full" />
+                    </div>
+                    <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+                  </>
+                ) : (
+                  <div aria-hidden className="absolute inset-0 -z-10 bg-brand">
+                    <Salad className="absolute -right-10 -top-10 size-80 text-black/90" strokeWidth={1} />
+                  </div>
+                )}
+                <span className={cn("absolute left-6 top-6 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest sm:left-8 sm:top-8", s.photo ? "glass text-accent" : "bg-black text-accent")}>
                   {s.tag}
                 </span>
-                <div className="glass-strong rounded-2xl p-6 sm:p-7">
-                  <h3 className="font-display-tight text-3xl font-extrabold min-[400px]:text-4xl sm:text-5xl lg:text-6xl">{s.title}</h3>
+                <div className={cn("rounded-2xl p-6 sm:p-7", s.photo ? "glass-strong" : "bg-black")}>
+                  <h3 className="font-display-tight text-3xl font-extrabold sm:text-4xl xl:text-5xl">{s.title}</h3>
                   <p className="mt-4 max-w-md text-bone">{s.blurb}</p>
                   <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
                     {s.points.map((p) => (

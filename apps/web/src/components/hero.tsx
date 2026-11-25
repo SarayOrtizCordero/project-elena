@@ -29,7 +29,7 @@ export function Hero() {
       <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-7xl flex-col justify-between px-5 pb-[21rem] pt-10 sm:pb-[27rem] sm:pt-14 lg:pb-8">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-5xl">
           <motion.p variants={item} className="mb-6 text-xs font-bold uppercase tracking-[0.22em]">
-            Entrenadora personal · Presencial y online
+            Entrenadora personal · Entreno y nutrición
           </motion.p>
 
           <RevealText
