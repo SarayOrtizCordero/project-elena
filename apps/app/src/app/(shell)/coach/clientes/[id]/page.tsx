@@ -3,16 +3,52 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ChevronLeft, ClipboardEdit, MessageCircle } from "lucide-react";
+import { useEffect, useState } from "react";
 import { cn } from "@elena/ui";
 import { LineChart } from "@/components/line-chart";
 import { useToast } from "@/components/toast";
+import { InPersonToggle } from "@/components/trainer/InPersonToggle";
 import { clients } from "@/lib/data";
+import { repo } from "@/lib/repo";
+import type { Profile } from "@/lib/types";
 import { adherenceTone } from "@/lib/tone";
 
 export default function ClienteDetalle() {
   const { id } = useParams<{ id: string }>();
   const toast = useToast((s) => s.show);
   const c = clients.find((x) => x.id === id);
+  const [real, setReal] = useState<Profile | null | undefined>(undefined);
+  useEffect(() => {
+    if (c) return;
+    repo.listClients().then((l) => setReal(l.find((x) => x.id === id) ?? null)).catch(() => setReal(null));
+  }, [c, id]);
+
+  // Cliente real de Supabase (sin datos de adherencia de la demo): ficha básica con acceso presencial y chat.
+  if (!c && real) {
+    return (
+      <div className="space-y-5">
+        <Link href="/coach" className="inline-flex items-center gap-1 text-sm text-mute hover:text-volt">
+          <ChevronLeft className="size-4" /> Panel
+        </Link>
+        <div className="flex items-center gap-4">
+          <span className="grid size-16 place-items-center rounded-full bg-volt font-display text-4xl text-ink">{real.full_name[0]}</span>
+          <div>
+            <h1 className="font-display-tight text-4xl font-extrabold sm:text-5xl">{real.full_name}</h1>
+            <p className="text-sm text-mute">{real.email}</p>
+          </div>
+        </div>
+        <InPersonToggle clientId={real.id} />
+        <Link
+          href={`/coach/chat?client=${real.id}`}
+          className="flex h-14 items-center justify-center gap-2 rounded-full bg-volt font-display text-lg uppercase tracking-wide text-ink transition active:scale-[0.97]"
+        >
+          <MessageCircle className="size-5" /> Abrir chat
+        </Link>
+      </div>
+    );
+  }
+
+  if (!c && real === undefined) return <p className="py-16 text-center text-mute">Cargando…</p>;
 
   if (!c) {
     return (
@@ -44,6 +80,8 @@ export default function ClienteDetalle() {
         </div>
       </div>
 
+      <InPersonToggle clientId={c.id} />
+
       <div className="grid grid-cols-3 gap-3">
         <div className="rounded-3xl border border-line bg-ink-2 p-4">
           <p className="text-xs text-mute">Adherencia</p>
@@ -74,12 +112,12 @@ export default function ClienteDetalle() {
       </section>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        <button
-          onClick={() => toast(`Mensaje enviado a ${c.name.split(" ")[0]} (demo)`)}
+        <Link
+          href={`/coach/chat?client=${c.id}`}
           className="flex h-14 items-center justify-center gap-2 rounded-full bg-volt font-display text-lg uppercase tracking-wide text-ink transition active:scale-[0.97]"
         >
           <MessageCircle className="size-5" /> Enviar mensaje
-        </button>
+        </Link>
         <button
           onClick={() => toast("Editor de planes disponible en la versión final")}
           className="flex h-14 items-center justify-center gap-2 rounded-full border border-line font-display text-lg uppercase tracking-wide transition hover:border-volt hover:text-volt active:scale-[0.97]"

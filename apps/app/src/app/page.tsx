@@ -8,6 +8,8 @@ import { LogoBadge } from "@elena/ui";
 import { useApp, type Role } from "@/lib/store";
 import { useMounted } from "@/lib/hooks";
 import { InstallApp } from "@/components/install-app";
+import { SupabaseLogin } from "@/components/supabase-login";
+import { isSupabaseConfigured } from "@/lib/env";
 
 const WEB_URL = process.env.NEXT_PUBLIC_WEB_URL ?? "http://localhost:3000";
 
@@ -45,6 +47,9 @@ export default function Login() {
           <p className="mt-4 text-mute">Entrenos, comidas y evolución en un solo lugar.</p>
         </motion.div>
 
+        {isSupabaseConfigured ? (
+          <SupabaseLogin />
+        ) : (
         <div className="mt-8 space-y-3">
           {options.map((o, i) => (
             <motion.button
@@ -68,11 +73,12 @@ export default function Login() {
             </motion.button>
           ))}
         </div>
+        )}
 
         <InstallApp />
 
         <p className="mt-6 text-center text-xs text-mute">
-          Demo: acceso sin contraseña y datos provisionales. ·{" "}
+          {isSupabaseConfigured ? "Acceso con tu cuenta." : "Demo: acceso sin contraseña y datos provisionales."} ·{" "}
           <a href={WEB_URL} className="underline underline-offset-2 hover:text-volt">
             Volver a la web
           </a>

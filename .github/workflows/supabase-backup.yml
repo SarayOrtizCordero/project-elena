@@ -1,0 +1,52 @@
+name: Supabase backup
+
+# Copia semanal de la base de datos (gratis en GitHub Actions).
+# Requiere el secret SUPABASE_DB_URL (Settings → Secrets and variables → Actions):
+#   Supabase → Project Settings → Database → Connection string → "Session pooler" (URI, puerto 5432).
+#   Usa el pooler IPv4: el host directo db.<ref>.supabase.co es solo IPv6 y GitHub Actions no lo alcanza.
+on:
+  schedule:
+    - cron: "0 3 * * 0" # domingos 03:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Instalar cliente PostgreSQL 17
+        run: |
+          sudo install -d /usr/share/postgresql-common/pgdg
+          sudo curl -fsSL -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client-17
+
+      - name: Volcado (pg_dump → .sql.gz)
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SUPABASE_DB_URL:-}" ]; then echo "::error::Falta el secret SUPABASE_DB_URL"; exit 1; fi
+          STAMP=$(date -u +%Y%m%d-%H%M)
+          mkdir -p backup
+          # Esquemas de la app + auth (usuarios). Sin owner/privilegios para poder restaurar en otro proyecto.
+          pg_dump "$SUPABASE_DB_URL" --no-owner --no-privileges --schema=public --schema=auth \
+            | gzip -9 > "backup/elenitafit-${STAMP}.sql.gz"
+          test -s "backup/elenitafit-${STAMP}.sql.gz"
+          ls -lh backup
+
+      - name: Guardar como Artifact privado (30 días)
+        uses: actions/upload-artifact@v4
+        with:
+          name: supabase-backup-${{ github.run_id }}
+          path: backup/*.sql.gz
+          retention-days: 30
+          if-no-files-found: error

@@ -1,16 +1,56 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { AlertTriangle, ChevronRight, Search, TrendingUp, Users } from "lucide-react";
 import { cn } from "@elena/ui";
 import { clients } from "@/lib/data";
+import { repo } from "@/lib/repo";
+import type { Profile } from "@/lib/types";
 import { adherenceTone } from "@/lib/tone";
 
 const filters = ["Todos", "Online", "Presencial", "En riesgo"] as const;
 
+/** Con Supabase real aún no hay métricas de adherencia: se listan los clientes registrados. */
+function RegisteredClients() {
+  const [list, setList] = useState<Profile[] | null>(null);
+  useEffect(() => {
+    repo.listClients().then(setList).catch(() => setList([]));
+  }, []);
+  return (
+    <div className="space-y-5">
+      <div>
+        <h1 className="font-display-tight text-5xl font-extrabold sm:text-6xl">
+          Hola, <span className="text-volt">Elena</span>
+        </h1>
+        <p className="text-mute">Tus clientes registrados.</p>
+      </div>
+      <ul className="space-y-3">
+        {list === null && <li className="py-10 text-center text-mute">Cargando…</li>}
+        {list?.length === 0 && <li className="py-10 text-center text-mute">Aún no hay clientes registrados.</li>}
+        {list?.map((c) => (
+          <li key={c.id}>
+            <Link href={`/coach/clientes/${c.id}`} className="flex items-center gap-4 rounded-3xl border border-line bg-ink-2 p-4 transition-colors hover:border-volt/60">
+              <span className="grid size-12 place-items-center rounded-full bg-ink-3 font-display text-2xl text-volt">{c.full_name[0]}</span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate font-semibold">{c.full_name}</span>
+                <span className="block truncate text-xs text-mute">{c.is_in_person ? "Presencial" : "Online"} · {c.email}</span>
+              </span>
+              <ChevronRight className="size-5 text-mute" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function Panel() {
+  return repo.mode === "supabase" ? <RegisteredClients /> : <DemoPanel />;
+}
+
+function DemoPanel() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("Todos");
   const [q, setQ] = useState("");
 

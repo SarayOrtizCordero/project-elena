@@ -26,7 +26,8 @@ export const metadata: Metadata = {
   title: "Elena Fit · Tu progreso",
   description: "Entrenos, comidas y progreso en un solo lugar.",
   applicationName: "Elena Fit",
-  appleWebApp: { capable: true, title: "Elena Fit", statusBarStyle: "black-translucent" },
+  appleWebApp: { capable: true, title: "ElenitaFit", statusBarStyle: "default" },
+  formatDetection: { telephone: false },
   openGraph: {
     title: "Elena Fit · App (Demo 1)",
     description: "Entrenos, comidas y progreso en un solo lugar.",
@@ -43,6 +44,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  // Android/Chrome: el teclado virtual redimensiona la página (el chat queda sobre el teclado). iOS lo gestiona ChatBox.
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

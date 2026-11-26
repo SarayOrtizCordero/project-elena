@@ -4,10 +4,13 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "motion/react";
-import { CirclePlay, ClipboardList, Dumbbell, House, LayoutDashboard, LogOut, TrendingUp, Utensils } from "lucide-react";
+import { CalendarDays, CirclePlay, ClipboardList, Dumbbell, House, LayoutDashboard, LogOut, MessageCircle, TrendingUp, Utensils } from "lucide-react";
 import { Logo, cn } from "@elena/ui";
 import { useApp } from "@/lib/store";
 import { useMounted } from "@/lib/hooks";
+import { signOutEverywhere, useIdentity } from "@/lib/identity";
+import { isSupabaseConfigured } from "@/lib/env";
+import { NotificationManager } from "@/components/NotificationManager";
 import { Toaster } from "@/components/toast";
 
 const clientNav = [
@@ -16,9 +19,14 @@ const clientNav = [
   { href: "/comidas", label: "Comidas", icon: Utensils },
   { href: "/videos", label: "Vídeos", icon: CirclePlay },
   { href: "/progreso", label: "Progreso", icon: TrendingUp },
+  { href: "/chat", label: "Chat", icon: MessageCircle },
 ];
+/** Solo clientes con is_in_person = true (Elena lo activa en su ficha). */
+const bookingNav = { href: "/calendario", label: "Reservas", icon: CalendarDays };
 const coachNav = [
   { href: "/coach", label: "Panel", icon: LayoutDashboard },
+  { href: "/coach/calendario", label: "Calendario", icon: CalendarDays },
+  { href: "/coach/chat", label: "Mensajes", icon: MessageCircle },
   { href: "/coach/plantillas", label: "Plantillas", icon: ClipboardList },
 ];
 
@@ -28,6 +36,18 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
   const logout = useApp((s) => s.logout);
   const pathname = usePathname();
   const router = useRouter();
+  const { identity, loading } = useIdentity();
+
+  // Con Supabase la sesión real manda: si caduca, se vuelve al login.
+  useEffect(() => {
+    if (isSupabaseConfigured && mounted && !loading && !identity) logout();
+  }, [mounted, loading, identity, logout]);
+
+  const leave = async () => {
+    await signOutEverywhere();
+    logout();
+    router.replace("/");
+  };
 
   const isCoachPath = pathname.startsWith("/coach");
 
@@ -47,11 +67,14 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  const nav = role === "coach" ? coachNav : clientNav;
+  const nav = role === "coach" ? coachNav : identity?.isInPerson ? [...clientNav.slice(0, 5), bookingNav, clientNav[5]] : clientNav;
   const isActive = (href: string) =>
     href === "/coach" ? pathname === "/coach" || pathname.startsWith("/coach/clientes") : pathname.startsWith(href);
 
-  const who = role === "coach" ? { name: "Elena", sub: "Entrenadora" } : { name: "Lucía", sub: "Plan Pro · Online" };
+  const who =
+    role === "coach"
+      ? { name: identity?.fullName || "Elena", sub: "Entrenadora" }
+      : { name: identity?.fullName.split(" ")[0] || "Lucía", sub: identity?.isInPerson ? "Presencial" : "Online" };
 
   return (
     <div className="min-h-dvh lg:pl-64">
@@ -92,10 +115,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
             <p className="truncate text-xs text-mute">{who.sub}</p>
           </div>
           <button
-            onClick={() => {
-              logout();
-              router.replace("/");
-            }}
+            onClick={leave}
             aria-label="Cerrar sesión"
             className="grid size-9 place-items-center rounded-full text-mute transition-colors hover:bg-ink-3 hover:text-bone"
           >
@@ -109,10 +129,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
         <div className="flex h-14 items-center justify-between px-4">
           <Logo className="text-xl" />
           <button
-            onClick={() => {
-              logout();
-              router.replace("/");
-            }}
+            onClick={leave}
             aria-label="Cerrar sesión"
             className="grid size-10 place-items-center rounded-full border border-line text-mute"
           >
@@ -121,7 +138,10 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-4 py-6 pb-28 lg:px-10 lg:py-10 lg:pb-12">{children}</main>
+      <main className="mx-auto max-w-4xl px-4 py-6 pb-28 lg:px-10 lg:py-10 lg:pb-12">
+        <NotificationManager className="mb-5" />
+        {children}
+      </main>
 
       {/* Tab bar móvil */}
       <nav
@@ -136,7 +156,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
                 <Link
                   href={n.href}
                   className={cn(
-                    "relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-semibold transition-colors",
+                    "relative flex h-16 flex-col items-center justify-center gap-1 text-[10px] font-semibold transition-colors min-[400px]:text-[11px]",
                     active ? "text-volt" : "text-mute",
                   )}
                 >
@@ -147,7 +167,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
                       transition={{ type: "spring", stiffness: 420, damping: 36 }}
                     />
                   )}
-                  <n.icon className="size-6" />
+                  <n.icon className="size-[22px]" />
                   {n.label}
                 </Link>
               </li>
